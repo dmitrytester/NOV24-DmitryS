@@ -1,0 +1,627 @@
+{
+	"info": {
+		"_postman_id": "4b164727-9c95-4513-a4d9-5110a40437ad",
+		"name": "NOV24-Dmitry-Creates-Quizes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21142490"
+	},
+	"item": [
+		{
+			"name": "Teacher DMITRY",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 3000 ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(3000);\r",
+							"});\r",
+							"\r",
+							"// pm.test(\"Body matches user role - Teacher\", function () {\r",
+							"\r",
+							"pm.test(\"Body matches user role - Teacher\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"TEACHER\");\r",
+							"});\r",
+							"\r",
+							"// every time I send request \"to login as techer or student\" my token changes. And to avoid to change it every time in environment manually I need to create variable to change it automatically!!! That variable will be using to address to my response body! I can use snippet: Response body - JSON value check. From this snippet I need only part starts with \"var\".\r",
+							"\r",
+							"\r",
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"    // Now I will use snippet \"Set of environment variable\"\r",
+							"\r",
+							"pm.environment.set(\"teacherDmitryToken\", jsonData.token);\r",
+							"\r",
+							"\r",
+							"\r",
+							"pm.test(\"Body matches user role - Teacher\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.user.role).to.eql(\"TEACHER\");\r",
+							"    //pm.expect(jsonData.user.id).to.eql(10007);\r",
+							"    pm.expect(jsonData.user.email).to.eql(\"dmitryteacher@aol.com\");\r",
+							"    pm.expect(jsonData.user.name).to.eql(\"Dmitry S_teacher\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches user group - 'empty field'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.user.group).to.eql(\"ABC\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{teacherDmitryToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"{{teacherDmitryEmail}}\",\r\n  \"password\": \"{{teacherDmitryPassword}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/sign-in",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"sign-in"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DmitryS_teacherQuizSC2.1(1)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 2000 ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"    var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.environment.set(\"DmitryS_teacherQuizSC2.1(1)\", jsonData.id);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{teacherDmitryToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"DmitryS_teacherQuizSC2.1(1)\",\r\n  \"totalScore\": 1,\r\n  \"passingPercentage\": 75,\r\n  \"showStopperQuestion\": null,\r\n  \"questions\": [\r\n    {\r\n      \"type\": \"SINGLE_CHOICE\",\r\n      \"question\": \"The main focus of acceptance testing is?\",\r\n      \"score\": 1,\r\n      \"answer\": 0,\r\n      \"hasOtherOption\": false,\r\n      \"options\": [\r\n        \"testing for a business perspective\",\r\n        \"ensuring that the system is acceptable to all users \"\r\n      ]\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/quiz",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"quiz"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DmitryS_teacherQuizSC2.2(5)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 2000 ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"    var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.environment.set(\"DmitryS_teacherQuizSC2.2(5)\", jsonData.id);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{teacherDmitryToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"DmitryS_teacherQuizSC2.2(5)\",\r\n  \"totalScore\": 5,\r\n  \"passingPercentage\": 100,\r\n  \"showStopperQuestion\": null,\r\n  \"questions\": [\r\n    {\r\n      \"type\": \"SINGLE_CHOICE\",\r\n      \"question\": \"What is the purpose of test completion criteria in a test plan?\",\r\n      \"score\": 5,\r\n      \"answer\": 1,\r\n      \"hasOtherOption\": false,\r\n      \"options\": [\r\n        \"to ensure that the test case specification is complete\",\r\n        \"to plan when to stop testing\"\r\n      ]\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/quiz",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"quiz"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DmitryS_teacherQuizSC2.3(10)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 2000 ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"    var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.environment.set(\"DmitryS_teacherQuizSC2.3(10)\", jsonData.id);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{teacherDmitryToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"DmitryS_teacherQuizSC2.3(10)\",\r\n  \"totalScore\": 10,\r\n  \"passingPercentage\": 75,\r\n  \"showStopperQuestion\": null,\r\n  \"questions\": [\r\n    {\r\n      \"type\": \"SINGLE_CHOICE\",\r\n      \"question\": \"Which testing phase tests individual software modules combined together as a group?\",\r\n      \"score\": 10,\r\n      \"answer\": 1,\r\n      \"hasOtherOption\": false,\r\n      \"options\": [\r\n        \"Module testing\",\r\n        \"Integration testing\"\r\n      ]\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/quiz",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"quiz"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DmitryS_teacherQuizSC2.1(1)MC3.1(1)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 2000 ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"    var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.environment.set(\"DmitryS_teacherQuizSC2.1(1)MC3.1(1)\", jsonData.id);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{teacherDmitryToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"DmitryS_teacherQuizSC2.1(1)MC3.1(1)\",\r\n  \"totalScore\": 2,\r\n  \"passingPercentage\": 100,\r\n  \"showStopperQuestion\": null,\r\n  \"questions\": [\r\n    {\r\n      \"type\": \"SINGLE_CHOICE\",\r\n      \"question\": \"The main focus of acceptance testing is?\",\r\n      \"score\": 1,\r\n      \"answer\": 0,\r\n      \"hasOtherOption\": false,\r\n      \"options\": [\r\n        \"testing for a business perspective\",\r\n        \"ensuring that the system is acceptable to all users\"\r\n      ]\r\n    },\r\n    {\r\n      \"type\": \"MULTIPLE_CHOICE\",\r\n      \"question\": \"Name 3 levels of bug priority?\",\r\n      \"score\": 6,\r\n      \"answers\": [\r\n        0\r\n      ],\r\n      \"hasOtherOption\": false,\r\n      \"options\": [\r\n        \"High, Medium, Low\",\r\n        \"Severity Low, Priority Medium\"\r\n      ]\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/quiz",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"quiz"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DmitryS_teacherQuizMC3.1(1)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 2000 ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"    var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.environment.set(\"DmitryS_teacherQuizMC3.1(1)\", jsonData.id);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{teacherDmitryToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"DmitryS_teacherQuizMC3.1(1)\",\r\n  \"totalScore\": 1,\r\n  \"passingPercentage\": 75,\r\n  \"showStopperQuestion\": null,\r\n  \"questions\": [\r\n    {\r\n      \"type\": \"MULTIPLE_CHOICE\",\r\n      \"question\": \"Name 3 levels of bug priority?\",\r\n      \"score\": 1,\r\n      \"answers\": [\r\n        0\r\n      ],\r\n      \"hasOtherOption\": false,\r\n      \"options\": [\r\n        \"High, Medium, Low\",\r\n        \"Severity Low, Priority Medium\"\r\n      ]\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/quiz",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"quiz"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DmitryS_teacherQuizMC3.2(5)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 2000 ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"    var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.environment.set(\"DmitryS_teacherQuizMC3.2(5)\", jsonData.id);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{teacherDmitryToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"DmitryS_teacherQuizMC3.2(5)\",\r\n  \"totalScore\": 5,\r\n  \"passingPercentage\": 75,\r\n  \"showStopperQuestion\": null,\r\n  \"questions\": [\r\n    {\r\n      \"type\": \"MULTIPLE_CHOICE\",\r\n      \"question\": \"How many test cases you can create if you don't have requirements?\",\r\n      \"score\": 5,\r\n      \"answers\": [\r\n        0\r\n      ],\r\n      \"hasOtherOption\": false,\r\n      \"options\": [\r\n        \"Zero! No requirements - no test cases\",\r\n        \"As many as you want\"\r\n      ]\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/quiz",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"quiz"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DmitryS_teacherQuizSC2.1(1)MC3.13(5)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 2000 ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"    var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.environment.set(\"DmitryS_teacherQuizSC2.1(1)MC3.13(5)\", jsonData.id);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{teacherDmitryToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"DmitryS_teacherQuizSC2.1(1)MC3.13(5)\",\r\n  \"totalScore\": 6,\r\n  \"passingPercentage\": 100,\r\n  \"showStopperQuestion\": null,\r\n  \"questions\": [\r\n    {\r\n      \"type\": \"SINGLE_CHOICE\",\r\n      \"question\": \"The main focus of acceptance testing is?\",\r\n      \"score\": 1,\r\n      \"answer\": 0,\r\n      \"hasOtherOption\": false,\r\n      \"options\": [\r\n        \"testing for a business perspective\",\r\n        \"ensuring that the system is acceptable to all users\"\r\n      ]\r\n    },\r\n    {\r\n      \"type\": \"MULTIPLE_CHOICE\",\r\n      \"question\": \"What are the main components of bug report?\",\r\n      \"score\": 5,\r\n      \"answers\": [\r\n        0,\r\n        1,\r\n        2,\r\n        3\r\n      ],\r\n      \"hasOtherOption\": false,\r\n      \"options\": [\r\n        \"Short Description\",\r\n        \"Priority\",\r\n        \"Actual Result\",\r\n        \"Expected Result\",\r\n        \"Test Set\"\r\n      ]\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/quiz",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"quiz"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DmitryS_teacherQuizMC3.13(5)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 2000 ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"    var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.environment.set(\"DmitryS_teacherQuizMC3.13(5)\", jsonData.id);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{teacherDmitryToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"DmitryS_teacherQuizMC3.13(5)\",\r\n  \"totalScore\": 5,\r\n  \"passingPercentage\": 100,\r\n  \"showStopperQuestion\": null,\r\n  \"questions\": [\r\n    {\r\n      \"type\": \"MULTIPLE_CHOICE\",\r\n      \"question\": \"What are the main components of bug report?\",\r\n      \"score\": 5,\r\n      \"answers\": [\r\n        0,\r\n        1,\r\n        2,\r\n        3\r\n      ],\r\n      \"hasOtherOption\": false,\r\n      \"options\": [\r\n        \"Short Description\",\r\n        \"Priority\",\r\n        \"Actual Result\",\r\n        \"Expected Result\",\r\n        \"Test Set\"\r\n      ]\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/quiz",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"quiz"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Dmitry S_teacher Textual 1.1 (1)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 2000 ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"    var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.environment.set(\"DmitryS_teacherQuizTextual1.1(1)\", jsonData.id);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{teacherDmitryToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Dmitry S_teacher Textual 1.1(1)\",\r\n  \"totalScore\": 1,\r\n  \"passingPercentage\": 75,\r\n  \"showStopperQuestion\": null,\r\n  \"questions\": [\r\n    {\r\n      \"type\": \"TEXTUAL\",\r\n      \"question\": \"What is Software Quality Assurance?\",\r\n      \"score\": 1\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/quiz",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"quiz"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
